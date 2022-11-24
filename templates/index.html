@@ -1,0 +1,49 @@
+<html lang="en">
+
+<head>
+
+    <!-- Alpine Locals -->
+    <script src="{{ url_for('static', filename='alpinejs_fragmentor.js') }}"></script>
+    <!-- Alpine Plugins -->
+    <script defer src="https://unpkg.com/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <!-- Alpine Core -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <title>AlpineJS Fragmentor</title>
+
+</head>
+
+<body>
+
+<div x-data style="width: 100%; padding-bottom: 50px;">
+    <div style="display: flex; justify-content: center; padding: 20px;" x-fragmentor:get="/fragment/instant-load-sloth">
+        <img src="{{ url_for('static', filename='puff.svg') }}" alt="loading...">
+    </div>
+
+    <p style="text-align: center">Below the Flask route has been set to sleep for 2 secs</p>
+
+    <div style="display: flex; justify-content: center; padding: 20px;" x-fragmentor:get="/fragment/sloth">
+        <img src="{{ url_for('static', filename='puff.svg') }}" alt="loading...">
+    </div>
+
+    <p style="text-align: center">Below has been set with a fragmentor request delay of 1000ms</p>
+
+    <div style="display: flex; justify-content: center; padding: 20px;" x-fragmentor:get.delay.1000ms="{{ url_for('fragment_table') }}">
+        <img src="{{ url_for('static', filename='puff.svg') }}" alt="loading...">
+    </div>
+
+    <div style="height: 2000px; width: 100%; margin: 10px; border: 1px solid black; text-align: center">
+        <p>This is a blank box used to test AlpineJS intersect.
+            When the Client card below comes into view, it should send a get request to the client_card endpoint.</p>
+    </div>
+
+    <p style="text-align: center">Using Alpine intersect, the following will only load when it comes into the viewport. This is fetching from the flask route that has a 2 secs sleep set)</p>
+
+    <div style="display: flex; justify-content: center; padding: 20px;" x-intersect="$fragmentor('{{ url_for("fragment_sloth") }}')">
+        <img src="{{ url_for('static', filename='puff.svg') }}" alt="loading...">
+    </div>
+</div>
+
+</body>
+
+</html>
