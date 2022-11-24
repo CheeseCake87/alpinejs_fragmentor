@@ -2,9 +2,9 @@
 
 <head>
 
-    <!-- Alpine Locals -->
-    <script defer src="https://unpkg.com/@uilix/fragmentor@0.0.4/dist/cdn.min.js"></script>
+
     <!-- Alpine Plugins -->
+    <script defer src="https://unpkg.com/@uilix/fragmentor@0.0.4/dist/cdn.min.js"></script>
     <script defer src="https://unpkg.com/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
     <!-- Alpine Core -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -37,7 +37,8 @@
             When the Client card below comes into view, it should send a get request to the client_card endpoint.</p>
     </div>
 
-    <p style="text-align: center">Using Alpine intersect, the following will only load when it comes into the viewport. This is fetching from the flask route that has a 2 secs sleep set)</p>
+    <p style="text-align: center">Using Alpine intersect, the following will only load when it comes into the viewport. This is fetching from the flask route
+        that has a 2 secs sleep set)</p>
 
     <div style="display: flex; justify-content: center; padding: 20px;" x-intersect="$fragmentor('{{ url_for("fragment_sloth") }}')">
         <img src="{{ url_for('static', filename='puff.svg') }}" alt="loading...">
