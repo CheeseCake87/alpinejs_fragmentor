@@ -4,8 +4,10 @@
 
 
     <!-- Alpine Plugins -->
-    <script defer src="https://unpkg.com/@uilix/fragmentor@0.0.4/dist/cdn.min.js"></script>
+    {#    <script defer src="https://unpkg.com/@uilix/fragmentor@0.0.4/dist/cdn.min.js"></script>#}
     <script defer src="https://unpkg.com/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <!-- Alpine Local -->
+    <script defer src="{{ url_for('static', filename='alpinejs_fragmentor.js') }}"></script>
     <!-- Alpine Core -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
@@ -15,34 +17,108 @@
 
 <body>
 
-<div x-data style="width: 100%; padding-bottom: 50px;">
+<div x-data style="width: 100%; padding-bottom: 50px; text-align: center">
+
+    <p><strong>Example of a standard x-fragmentor attribute call.</strong></p>
+    <code>
+        x-fragmentor:get="/fragment/instant-load-sloth"
+    </code>
     <div style="display: flex; justify-content: center; padding: 20px;" x-fragmentor:get="/fragment/instant-load-sloth">
         <img src="{{ url_for('static', filename='puff.svg') }}" alt="loading...">
     </div>
 
-    <p style="text-align: center">Below the Flask route has been set to sleep for 2 secs</p>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+         stroke-linejoin="round" class="feather feather-minus">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+    </svg>
 
+    <p><strong>Example of a standard x-fragmentor attribute call, but the Flask route is set to sleep for 2 secs.</strong></p>
+    <p>This results in the loading icon showing until the response has been returned.</p>
+    <code>
+        x-fragmentor:get="/fragment/sloth"
+    </code>
     <div style="display: flex; justify-content: center; padding: 20px;" x-fragmentor:get="/fragment/sloth">
         <img src="{{ url_for('static', filename='puff.svg') }}" alt="loading...">
     </div>
 
-    <p style="text-align: center">Below has been set with a fragmentor request delay of 1000ms</p>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+         stroke-linejoin="round" class="feather feather-minus">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+    </svg>
 
-    <div style="display: flex; justify-content: center; padding: 20px;" x-fragmentor:get.delay.1000ms="{{ url_for('fragment_table') }}">
+    <p><strong>Example of a x-fragmentor attribute call, with a delay on the request.</strong></p>
+    <p>This is used to allow certain fragments to be delayed in their loading.</p>
+    <code>
+        x-fragmentor:get.delay.1000ms="/fragment/instant-load-sloth"
+    </code>
+    <div style="display: flex; justify-content: center; padding: 20px;" x-fragmentor:get.delay.1000ms="/fragment/instant-load-sloth">
         <img src="{{ url_for('static', filename='puff.svg') }}" alt="loading...">
     </div>
 
-    <div style="height: 2000px; width: 100%; margin: 10px; border: 1px solid black; text-align: center">
-        <p>This is a blank box used to test AlpineJS intersect.
-            When the Client card below comes into view, it should send a get request to the client_card endpoint.</p>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+         stroke-linejoin="round" class="feather feather-minus">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+    </svg>
+
+    <p><strong>Example of fragmentor pushing the response to another element on the page using Alpine refs</strong></p>
+    <p>The fetch call to the content will only happen when this element enters the viewport.</p>
+    <code>
+        x-init="$fragmentor('/fragment/instant-load-sloth', $refs.fragment1)"
+    </code>
+
+    <div style="display: flex; justify-content: center; padding: 20px;" x-init="$fragmentor('/fragment/instant-load-sloth', $refs.fragment1)">
+
     </div>
 
-    <p style="text-align: center">Using Alpine intersect, the following will only load when it comes into the viewport. This is fetching from the flask route
-        that has a 2 secs sleep set)</p>
-
-    <div style="display: flex; justify-content: center; padding: 20px;" x-intersect="$fragmentor('{{ url_for("fragment_sloth") }}')">
+    <div x-ref="fragment1" style="padding-bottom: 20px">
         <img src="{{ url_for('static', filename='puff.svg') }}" alt="loading...">
     </div>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+         stroke-linejoin="round" class="feather feather-minus">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+    </svg>
+
+
+    <p><strong>Scroll down for an example of the fragmentor working with x-intersect</strong></p>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <polyline points="19 12 12 19 5 12"></polyline>
+    </svg>
+
+    <div style="height: 2000px; width: 2px; margin: 10px; background: black; margin: 0 auto">
+    </div>
+
+    <p><strong>Example of fragmentor working with x-intersect</strong></p>
+    <p>The fetch call to the content will only happen when this element enters the viewport.</p>
+    <code>
+        x-intersect="$fragmentor('/fragment/sloth')"
+    </code>
+    <div style="display: flex; justify-content: center; padding: 20px;" x-intersect="$fragmentor('/fragment/sloth')">
+        <img src="{{ url_for('static', filename='puff.svg') }}" alt="loading...">
+    </div>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+         stroke-linejoin="round" class="feather feather-minus">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+    </svg>
+
+    <p><strong>Example of fragmentor pushing being combined with x-intersect</strong></p>
+    <p>The fetch call to the content will only happen when this element enters the viewport.</p>
+    <code>
+        x-intersect="$fragmentor('/fragment/sloth', $refs.fragment2)"
+    </code>
+
+    <div style="display: flex; justify-content: center; padding: 20px;" x-intersect="$fragmentor('/fragment/sloth', $refs.fragment2)">
+
+    </div>
+
+    <div x-ref="fragment2">
+        <img src="{{ url_for('static', filename='puff.svg') }}" alt="loading...">
+    </div>
+
 </div>
 
 </body>

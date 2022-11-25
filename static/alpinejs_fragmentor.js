@@ -1,16 +1,29 @@
 (() => {
     function src_default(Alpine) {
 
-        Alpine.magic('fragmentor', (el) => subject => {
-            fetch(subject).catch(error => {
-                console.log(error);
-            }).then((response) => {
-                if (response.status === 200) {
-                    response.text().then((text) => {
-                        el.innerHTML = text;
-                    });
-                }
-            });
+        Alpine.magic('fragmentor', (el) => (uri, ref) => {
+            console.log('fragmentor', uri, ref);
+            if (!ref) {
+                fetch(uri).catch(error => {
+                    console.log(error);
+                }).then((response) => {
+                    if (response.status === 200) {
+                        response.text().then((text) => {
+                            el.innerHTML = text;
+                        });
+                    }
+                });
+            } else {
+                fetch(uri).catch(error => {
+                    console.log(error);
+                }).then((response) => {
+                    if (response.status === 200) {
+                        response.text().then((text) => {
+                            ref.innerHTML = text;
+                        });
+                    }
+                });
+            }
         })
 
         Alpine.directive("fragmentor", (el, {value, modifiers, expression}) => {
