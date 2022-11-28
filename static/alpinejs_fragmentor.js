@@ -2,7 +2,6 @@
     function src_default(Alpine) {
 
         Alpine.magic('fragmentor', (el) => (uri, ref) => {
-            console.log('fragmentor', uri, ref);
             if (!ref) {
                 fetch(uri).catch(error => {
                     console.log(error);
@@ -23,6 +22,14 @@
                         });
                     }
                 });
+            }
+        })
+
+        Alpine.magic('fragmentor_markup', (el) => (markup, ref) => {
+            if (!ref) {
+                el.innerHTML = markup;
+            } else {
+                ref.innerHTML = markup;
             }
         })
 

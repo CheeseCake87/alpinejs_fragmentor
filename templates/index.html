@@ -2,7 +2,6 @@
 
 <head>
 
-
     <!-- Alpine Plugins -->
     {#    <script defer src="https://unpkg.com/@uilix/fragmentor@0.0.4/dist/cdn.min.js"></script>#}
     <script defer src="https://unpkg.com/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
@@ -13,111 +12,243 @@
 
     <title>AlpineJS Fragmentor</title>
 
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            background: whitesmoke;
+        }
+
+        .example-card {
+            border: 1px solid #ccc;
+            width: 800px;
+            margin: 20px auto 0 auto;
+            padding: 0.5em;
+            background: white;
+            border-radius: 0.5em;
+        }
+
+        .example-card-header {
+            padding: 0.6em 0.5em 0.6em 0.5em;
+            font-weight: bold;
+            font-size: 1.2em;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .example-card-body {
+            padding: 0.6em 0.5em 0.6em 0.5em;
+        }
+    </style>
+
 </head>
 
 <body>
 
-<div x-data style="width: 100%; padding-bottom: 50px; text-align: center">
+<div x-data>
 
-    <p><strong>Example of a standard x-fragmentor attribute call.</strong></p>
-    <code>
-        x-fragmentor:get="/fragment/instant-load-sloth"
-    </code>
-    <div style="display: flex; justify-content: center; padding: 20px;" x-fragmentor:get="/fragment/instant-load-sloth">
-        <img src="{{ url_for('static', filename='puff.svg') }}" alt="loading...">
+
+    {% set loading_image = '<img src="' + url_for('static', filename='puff.svg') + '" alt="loading...">' %}
+
+
+    <div class="example-card">
+
+        <div class="example-card-header">Example of a standard x-fragmentor attribute call, with a button to switch content.</div>
+
+        <div class="example-card-body">
+            <p>Button:</p>
+            <code>
+                @click="$fragmentor('/fragment/sloth', $refs.entry)"
+            </code>
+            <p>Entry div:</p>
+            <code>
+                x-init="$fragmentor('/fragment/sloth')" x-ref="entry"
+            </code>
+
+            <div style="padding: 20px">
+                <button @click="$fragmentor('/fragment/sloth', $refs.entry)">Show Sloth</button>
+                <button @click="$fragmentor('/fragment/table', $refs.entry)">Show Table</button>
+            </div>
+
+            <div style="padding: 20px" x-init="$fragmentor('/fragment/sloth')" x-ref="entry">
+                {{ loading_image|safe }}
+            </div>
+
+        </div>
     </div>
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-         stroke-linejoin="round" class="feather feather-minus">
-        <line x1="5" y1="12" x2="19" y2="12"></line>
-    </svg>
 
-    <p><strong>Example of a standard x-fragmentor attribute call, but the Flask route is set to sleep for 2 secs.</strong></p>
-    <p>This results in the loading icon showing until the response has been returned.</p>
-    <code>
-        x-fragmentor:get="/fragment/sloth"
-    </code>
-    <div style="display: flex; justify-content: center; padding: 20px;" x-fragmentor:get="/fragment/sloth">
-        <img src="{{ url_for('static', filename='puff.svg') }}" alt="loading...">
+    <div class="example-card">
+
+        <div class="example-card-header">Example of a standard x-fragmentor attribute call, with a button to switch content. Including loading markup.</div>
+
+        <div class="example-card-body">
+
+            <p>Injects the loading image into the target element, then replaces it with the content from the fragment.</p>
+
+
+            <p>Button:</p>
+            <code>
+                @click="$fragmentor_markup('{{ loading_image }}', $refs.entry2); $fragmentor('/fragment/sloth-slow', $refs.entry2)"
+            </code>
+
+            <p>Entry div:</p>
+            <code>
+                x-init="$fragmentor('/fragment/sloth-sloth')" x-ref="entry"
+            </code>
+
+            <div style="padding: 20px;">
+                <button @click="$fragmentor_markup('{{ loading_image }}', $refs.entry2); $fragmentor('/fragment/sloth-slow', $refs.entry2)">
+                    Show Sloth
+                </button>
+                <button @click="$fragmentor_markup('{{ loading_image }}', $refs.entry2); $fragmentor('/fragment/table-slow', $refs.entry2)">
+                    Show Table
+                </button>
+            </div>
+
+            <div style="padding: 20px;" x-init="$fragmentor('/fragment/sloth-slow')" x-ref="entry2">
+                {{ loading_image|safe }}
+            </div>
+
+        </div>
     </div>
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-         stroke-linejoin="round" class="feather feather-minus">
-        <line x1="5" y1="12" x2="19" y2="12"></line>
-    </svg>
+    <div class="example-card">
 
-    <p><strong>Example of a x-fragmentor attribute call, with a delay on the request.</strong></p>
-    <p>This is used to allow certain fragments to be delayed in their loading.</p>
-    <code>
-        x-fragmentor:get.delay.1000ms="/fragment/instant-load-sloth"
-    </code>
-    <div style="display: flex; justify-content: center; padding: 20px;" x-fragmentor:get.delay.1000ms="/fragment/instant-load-sloth">
-        <img src="{{ url_for('static', filename='puff.svg') }}" alt="loading...">
+        <div class="example-card-header">Example of a standard x-fragmentor attribute call.</div>
+
+        <div class="example-card-body">
+            <p>div element:</p>
+            <code>
+                x-fragmentor:get="/fragment/sloth"
+            </code>
+            <div style="padding: 20px;" x-fragmentor:get="/fragment/sloth">
+                {{ loading_image|safe }}
+            </div>
+
+        </div>
     </div>
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-         stroke-linejoin="round" class="feather feather-minus">
-        <line x1="5" y1="12" x2="19" y2="12"></line>
-    </svg>
 
-    <p><strong>Example of fragmentor pushing the response to another element on the page using Alpine refs</strong></p>
-    <p>The fetch call to the content will only happen when this element enters the viewport.</p>
-    <code>
-        x-init="$fragmentor('/fragment/instant-load-sloth', $refs.fragment1)"
-    </code>
+    <div class="example-card">
 
-    <div style="display: flex; justify-content: center; padding: 20px;" x-init="$fragmentor('/fragment/instant-load-sloth', $refs.fragment1)">
+        <div class="example-card-header">Example of a standard x-fragmentor attribute call, but the Flask route is set to sleep for 2 secs.</div>
 
+        <div class="example-card-body">
+            <p>This results in the loading icon showing until the response has been returned.</p>
+            <code>
+                x-fragmentor:get="/fragment/sloth-slow"
+            </code>
+            <div style="padding: 20px;" x-fragmentor:get="/fragment/sloth-slow">
+                {{ loading_image|safe }}
+            </div>
+
+        </div>
     </div>
 
-    <div x-ref="fragment1" style="padding-bottom: 20px">
-        <img src="{{ url_for('static', filename='puff.svg') }}" alt="loading...">
+    <div class="example-card">
+
+        <div class="example-card-header">Example of a x-fragmentor attribute call, with a delay on the request.</div>
+
+        <div class="example-card-body">
+            <p>This is used to allow certain fragments to be delayed in their loading.</p>
+            <code>
+                x-fragmentor:get.delay.1000ms="/fragment/sloth"
+            </code>
+            <div style="padding: 20px;" x-fragmentor:get.delay.1000ms="/fragment/sloth">
+                {{ loading_image|safe }}
+            </div>
+
+        </div>
     </div>
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-         stroke-linejoin="round" class="feather feather-minus">
-        <line x1="5" y1="12" x2="19" y2="12"></line>
-    </svg>
 
+    <div class="example-card">
 
-    <p><strong>Scroll down for an example of the fragmentor working with x-intersect</strong></p>
+        <div class="example-card-header">Example of fragmentor pushing the response to another element on the page using Alpine refs.</div>
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-         stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down">
-        <line x1="12" y1="5" x2="12" y2="19"></line>
-        <polyline points="19 12 12 19 5 12"></polyline>
-    </svg>
+        <div class="example-card-body">
+            <p>The fetch call to the content will only happen when this element enters the viewport.</p>
+            <code>
+                x-init="$fragmentor('/fragment/sloth', $refs.fragment1)"
+            </code>
 
-    <div style="height: 2000px; width: 2px; margin: 10px; background: black; margin: 0 auto">
+            <div x-init="$fragmentor('/fragment/sloth', $refs.fragment1)">
+
+            </div>
+
+            <div style="padding: 20px;" x-ref="fragment1" style="padding-bottom: 20px">
+                {{ loading_image|safe }}
+            </div>
+
+        </div>
     </div>
 
-    <p><strong>Example of fragmentor working with x-intersect</strong></p>
-    <p>The fetch call to the content will only happen when this element enters the viewport.</p>
-    <code>
-        x-intersect="$fragmentor('/fragment/sloth')"
-    </code>
-    <div style="display: flex; justify-content: center; padding: 20px;" x-intersect="$fragmentor('/fragment/sloth')">
-        <img src="{{ url_for('static', filename='puff.svg') }}" alt="loading...">
+    <div class="example-card">
+
+        <div class="example-card-header">Scroll down for an example of the fragmentor working with x-intersect.</div>
+
+        <div class="example-card-body">
+
+            <div style="text-align: center; width: 100%;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <polyline points="19 12 12 19 5 12"></polyline>
+                </svg>
+            </div>
+
+            <div style="height: 800px; width: 2px; background: black; margin: 0 auto">
+            </div>
+
+            <div style="text-align: center; width: 100%;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <polyline points="19 12 12 19 5 12"></polyline>
+                </svg>
+            </div>
+
+        </div>
     </div>
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-         stroke-linejoin="round" class="feather feather-minus">
-        <line x1="5" y1="12" x2="19" y2="12"></line>
-    </svg>
+    <div class="example-card">
 
-    <p><strong>Example of fragmentor pushing being combined with x-intersect</strong></p>
-    <p>The fetch call to the content will only happen when this element enters the viewport.</p>
-    <code>
-        x-intersect="$fragmentor('/fragment/sloth', $refs.fragment2)"
-    </code>
+        <div class="example-card-header">Example of fragmentor working with x-intersect.</div>
 
-    <div style="display: flex; justify-content: center; padding: 20px;" x-intersect="$fragmentor('/fragment/sloth', $refs.fragment2)">
+        <div class="example-card-body">
+            <p>The fetch call to the content will only happen when this element enters the viewport.</p>
+            <code>
+                x-intersect="$fragmentor('/fragment/sloth-slow')"
+            </code>
+            <div style="padding: 20px;" x-intersect="$fragmentor('/fragment/sloth-slow')">
+                {{ loading_image|safe }}
+            </div>
 
+        </div>
     </div>
 
-    <div x-ref="fragment2">
-        <img src="{{ url_for('static', filename='puff.svg') }}" alt="loading...">
+    <div class="example-card">
+
+        <div class="example-card-header">Example of fragmentor pushing being combined with x-intersect.</div>
+
+        <div class="example-card-body">
+
+            <p>This example is pushing the response to another element using x-ref.</p>
+            <code>
+                x-intersect="$fragmentor('/fragment/sloth-slow', $refs.fragment2)"
+            </code>
+
+            <div x-intersect="$fragmentor('/fragment/sloth-slow', $refs.fragment2)">
+
+            </div>
+
+            <div style="padding: 20px;" x-ref="fragment2">
+                {{ loading_image|safe }}
+            </div>
+
+        </div>
     </div>
+
 
 </div>
 

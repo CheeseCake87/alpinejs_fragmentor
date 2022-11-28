@@ -10,19 +10,25 @@ def hello_world():
     return render_template('index.html')
 
 
-@app.route('/fragment/instant-load-sloth')
-def fragment_instant_load_sloth():
+@app.route('/fragment/sloth-slow')
+def fragment_sloth_slow():
+    sleep(2)
     return render_template('fragment_sloth.html')
 
 
 @app.route('/fragment/sloth')
 def fragment_sloth():
-    sleep(2)
     return render_template('fragment_sloth.html')
 
 
 @app.route('/fragment/table')
 def fragment_table():
+    return render_template('fragment_table.html')
+
+
+@app.route('/fragment/table-slow')
+def fragment_table_slow():
+    sleep(2)
     return render_template('fragment_table.html')
 
 
