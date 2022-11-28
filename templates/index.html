@@ -1,12 +1,12 @@
 <html lang="en">
 
 <head>
+    {#    <!-- Alpine Local -->#}
+    {#    <script defer src="{{ url_for('static', filename='alpinejs_fragmentor.js') }}"></script>#}
 
     <!-- Alpine Plugins -->
-    {#    <script defer src="https://unpkg.com/@uilix/fragmentor@0.0.4/dist/cdn.min.js"></script>#}
+    <script defer src="https://unpkg.com/@uilix/fragmentor@0.0.7/dist/cdn.min.js"></script>
     <script defer src="https://unpkg.com/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
-    <!-- Alpine Local -->
-    <script defer src="{{ url_for('static', filename='alpinejs_fragmentor.js') }}"></script>
     <!-- Alpine Core -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
@@ -49,68 +49,20 @@
 
     {% set loading_image = '<img src="' + url_for('static', filename='puff.svg') + '" alt="loading...">' %}
 
-
-    <div class="example-card">
-
-        <div class="example-card-header">Example of a standard x-fragmentor attribute call, with a button to switch content.</div>
-
-        <div class="example-card-body">
-            <p>Button:</p>
-            <code>
-                @click="$fragmentor('/fragment/sloth', $refs.entry)"
-            </code>
-            <p>Entry div:</p>
-            <code>
-                x-init="$fragmentor('/fragment/sloth')" x-ref="entry"
-            </code>
-
-            <div style="padding: 20px">
-                <button @click="$fragmentor('/fragment/sloth', $refs.entry)">Show Sloth</button>
-                <button @click="$fragmentor('/fragment/table', $refs.entry)">Show Table</button>
-            </div>
-
-            <div style="padding: 20px" x-init="$fragmentor('/fragment/sloth')" x-ref="entry">
-                {{ loading_image|safe }}
-            </div>
-
-        </div>
+    <div class="example-card" style="text-align: center">
+        <h1>AlpineJS fragmentor plugin examples</h1>
     </div>
 
-
     <div class="example-card">
-
-        <div class="example-card-header">Example of a standard x-fragmentor attribute call, with a button to switch content. Including loading markup.</div>
-
-        <div class="example-card-body">
-
-            <p>Injects the loading image into the target element, then replaces it with the content from the fragment.</p>
-
-
-            <p>Button:</p>
-            <code>
-                @click="$fragmentor_markup('{{ loading_image }}', $refs.entry2); $fragmentor('/fragment/sloth-slow', $refs.entry2)"
-            </code>
-
-            <p>Entry div:</p>
-            <code>
-                x-init="$fragmentor('/fragment/sloth-sloth')" x-ref="entry"
-            </code>
-
-            <div style="padding: 20px;">
-                <button @click="$fragmentor_markup('{{ loading_image }}', $refs.entry2); $fragmentor('/fragment/sloth-slow', $refs.entry2)">
-                    Show Sloth
-                </button>
-                <button @click="$fragmentor_markup('{{ loading_image }}', $refs.entry2); $fragmentor('/fragment/table-slow', $refs.entry2)">
-                    Show Table
-                </button>
-            </div>
-
-            <div style="padding: 20px;" x-init="$fragmentor('/fragment/sloth-slow')" x-ref="entry2">
-                {{ loading_image|safe }}
-            </div>
-
-        </div>
+            <textarea style="width: 100%; height: 100px" disabled>
+<!-- Alpine Plugins -->
+<script defer src="https://unpkg.com/@uilix/fragmentor@0.0.7/dist/cdn.min.js"></script>
+<script defer src="https://unpkg.com/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+<!-- Alpine Core -->
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+            </textarea>
     </div>
+
 
     <div class="example-card">
 
@@ -131,7 +83,7 @@
 
     <div class="example-card">
 
-        <div class="example-card-header">Example of a standard x-fragmentor attribute call, but the Flask route is set to sleep for 2 secs.</div>
+        <div class="example-card-header">Example of a standard x-fragmentor attribute call, but the Flask route is set to sleep for 0.5 secs.</div>
 
         <div class="example-card-body">
             <p>This results in the loading icon showing until the response has been returned.</p>
@@ -164,7 +116,7 @@
 
     <div class="example-card">
 
-        <div class="example-card-header">Example of fragmentor pushing the response to another element on the page using Alpine refs.</div>
+        <div class="example-card-header">Example of the fragmentor magic call pushing the response to another element on the page using Alpine refs.</div>
 
         <div class="example-card-body">
             <p>The fetch call to the content will only happen when this element enters the viewport.</p>
@@ -177,6 +129,155 @@
             </div>
 
             <div style="padding: 20px;" x-ref="fragment1" style="padding-bottom: 20px">
+                {{ loading_image|safe }}
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="example-card">
+
+        <div class="example-card-header">Example of a fragmentor magic call, with a button to switch content.</div>
+
+        <div class="example-card-body">
+            <p>Button:</p>
+            <code>
+                @click="$fragmentor('/fragment/sloth', $refs.entry)"
+            </code>
+            <p>Entry div:</p>
+            <code>
+                x-init="$fragmentor('/fragment/sloth')" x-ref="entry"
+            </code>
+
+            <div style="padding: 20px">
+                <button @click="$fragmentor('/fragment/sloth', $refs.entry)">Show Sloth</button>
+                <button @click="$fragmentor('/fragment/table', $refs.entry)">Show Table</button>
+            </div>
+
+            <div style="padding: 20px" x-init="$fragmentor('/fragment/sloth')" x-ref="entry">
+                {{ loading_image|safe }}
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="example-card">
+
+        <div class="example-card-header">Example of a fragmentor magic call with a button to switch content.
+            Uses the fragmentor_markup magic call to show loading.
+        </div>
+
+        <div class="example-card-body">
+
+            <p>Injects the loading image into the target element, then replaces it with the content from the fragment.</p>
+
+
+            <p>Button:</p>
+            <code>
+                @click="$fragmentor_markup('{{ loading_image }}', $refs.entry2); $fragmentor('/fragment/sloth-slow', $refs.entry2)"
+            </code>
+
+            <p>Entry div:</p>
+            <code>
+                x-init="$fragmentor('/fragment/sloth-sloth')" x-ref="entry2"
+            </code>
+
+            <div style="padding: 20px;">
+                <button @click="$fragmentor_markup('{{ loading_image }}', $refs.entry2); $fragmentor('/fragment/sloth-slow', $refs.entry2)">
+                    Show Sloth
+                </button>
+                <button @click="$fragmentor_markup('{{ loading_image }}', $refs.entry2); $fragmentor('/fragment/table-slow', $refs.entry2)">
+                    Show Table
+                </button>
+            </div>
+
+            <div style="padding: 20px;" x-init="$fragmentor('/fragment/sloth-slow')" x-ref="entry2">
+                {{ loading_image|safe }}
+            </div>
+
+        </div>
+    </div>
+
+    <div class="example-card">
+
+        <div class="example-card-header">Example of a fragmentor magic call that switches the current elements content to the specified markup when clicked.
+        </div>
+
+        <div class="example-card-body">
+
+            <p>Injects the loading image into the target element, then replaces it with the content from the fragment.</p>
+
+
+            <p>Button:</p>
+            <code>
+                @click="$fragmentor_markup('{{ loading_image }}', $refs.entry3); $fragmentor('/fragment/sloth-slow', $refs.entry3, 'loading...')"
+            </code>
+            <p>Image in button</p>
+            <code>
+                @click="$fragmentor_markup('{{ loading_image }}', $refs.entry3); $fragmentor('/fragment/table-slow', $refs.entry3, '{{ loading_image }}')"
+            </code>
+
+            <p>Entry div:</p>
+            <code>
+                x-init="$fragmentor('/fragment/sloth-sloth')" x-ref="entry3"
+            </code>
+
+            <div style="padding: 20px;">
+                <button @click="$fragmentor_markup('{{ loading_image }}', $refs.entry3); $fragmentor('/fragment/sloth-slow', $refs.entry3, 'loading...')">
+                    Show Sloth
+                </button>
+                <button @click="$fragmentor_markup('{{ loading_image }}', $refs.entry3); $fragmentor('/fragment/table-slow', $refs.entry3, '{{ loading_image }}')">
+                    Show Table
+                </button>
+            </div>
+
+            <div style="padding: 20px;" x-init="$fragmentor('/fragment/sloth-slow')" x-ref="entry3">
+                {{ loading_image|safe }}
+            </div>
+
+        </div>
+    </div>
+
+    <div class="example-card">
+
+        <div class="example-card-header">Example of a fragmentor magic call with an example of pushing the loading markup to another element.
+        </div>
+
+        <div class="example-card-body">
+
+            <p>Injects the loading image into the target element, then replaces it with the content from the fragment.</p>
+
+
+            <p>Button:</p>
+            <code>
+                @click="$fragmentor_markup('{{ loading_image }}', $refs.entry4); $fragmentor('/fragment/sloth-slow', $refs.entry4, 'loading...',
+                $refs.loadingMarker)"
+            </code>
+
+            <p>Loading marker div:</p>
+            <code>
+                x-ref="loadingMarker"
+            </code>
+
+            <p>Entry div:</p>
+            <code>
+                x-init="$fragmentor('/fragment/sloth-sloth')" x-ref="entry4"
+            </code>
+
+            <div style="padding: 20px;">
+                <button @click="$fragmentor_markup('{{ loading_image }}', $refs.entry4); $fragmentor('/fragment/sloth-slow', $refs.entry4, 'loading...', $refs.loadingMarker)">
+                    Show Sloth
+                </button>
+                <button @click="$fragmentor_markup('{{ loading_image }}', $refs.entry4); $fragmentor('/fragment/table-slow', $refs.entry4, 'loading...', $refs.loadingMarker)">
+                    Show Table
+                </button>
+            </div>
+
+            <div x-ref="loadingMarker" style="border: 1px solid black; padding: 10px">Loading marker box</div>
+
+            <div style="padding: 20px;" x-init="$fragmentor('/fragment/sloth-slow')" x-ref="entry4">
                 {{ loading_image|safe }}
             </div>
 

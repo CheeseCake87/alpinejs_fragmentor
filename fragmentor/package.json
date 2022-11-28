@@ -1,6 +1,6 @@
 {
     "name": "@uilix/fragmentor",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "Load fragments of HTML using AlpineJS",
     "homepage": "https://github.com/CheeseCake87/alpinejs_fragmentor",
     "repository": {

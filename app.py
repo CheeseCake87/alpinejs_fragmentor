@@ -12,7 +12,7 @@ def hello_world():
 
 @app.route('/fragment/sloth-slow')
 def fragment_sloth_slow():
-    sleep(2)
+    sleep(0.5)
     return render_template('fragment_sloth.html')
 
 
@@ -28,7 +28,7 @@ def fragment_table():
 
 @app.route('/fragment/table-slow')
 def fragment_table_slow():
-    sleep(2)
+    sleep(0.5)
     return render_template('fragment_table.html')
 
 
