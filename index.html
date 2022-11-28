@@ -48,7 +48,6 @@
 <div x-data>
 
 
-    
     <div class="example-card" style="text-align: center">
         <h1>AlpineJS fragmentor plugin examples</h1>
         <h4>NOTE: You are viewing the github pages example, page load delays will not show.</h4>
@@ -64,6 +63,84 @@
             </textarea>
     </div>
 
+
+    <div class="example-card">
+        <div class="example-card-header">x-fregmentor attribute</div>
+
+        <div class="example-card-body">
+            <p>x-fragmentor:get="url_of_route" will replace the current elements content with the response.</p>
+            <textarea style="width: 100%; height: 80px" disabled>
+<div x-data>
+    <div x-fragmentor:get="/alpinejs_fragmentor/sloth.html"></div>
+</div>
+            </textarea>
+            <p>x-fragmentor:method.delay.[int]ms="url_of_route" will delay the fetch call.</p>
+            <textarea style="width: 100%; height: 80px" disabled>
+<div x-data>
+    <div x-fragmentor:get.delay.1000ms="/alpinejs_fragmentor/sloth.html"></div>
+</div>
+            </textarea>
+        </div>
+    </div>
+
+
+    <div class="example-card">
+        <div class="example-card-header">$fregmentor magic call</div>
+
+        <div class="example-card-body">
+            <p>$fragmentor('url to get html from', 'element to push response to', 'html sent to loader', 'element for loader html')</p>
+            <textarea style="width: 100%; height: 300px" disabled>
+<!-- will update itself with the response html -->
+<div x-data>
+    <div x-init="$fragmentor('/alpinejs_fragmentor/sloth.html')"></div>
+</div>
+
+<!-- will update goHere with the response html -->
+<div x-data>
+    <div x-init="$fragmentor('/alpinejs_fragmentor/sloth.html', $refs.goHere)"></div>
+    <div x-ref="goHere"></div>
+</div>
+
+<!-- will update goHere with the response html, and update the current element with the text loading... for the length of the response. -->
+<div x-data>
+    <div x-init="$fragmentor('/alpinejs_fragmentor/sloth.html', $refs.goHere, 'loading...')"></div>
+    <div x-ref="goHere"></div>
+</div>
+            </textarea>
+            <p>you can only really use 'html sent to loader' and 'element for loader html' with @click (x-on:click)</p>
+            <textarea style="width: 100%; height: 280px" disabled>
+<!-- Will update the button text to 'loading...', send the response to goHere then revert the button text back to 'click me' -->
+<div x-data>
+    <button @click="$fragmentor('/alpinejs_fragmentor/sloth.html', $refs.goHere, 'loading...')"">click me</button>
+    <div x-ref="goHere"></div>
+</div>
+
+<!-- Will update the loadingText html to show the sloth.jpg image, send the response to goHere then revert the loadingText html back to being blank -->
+<div x-data>
+    <button @click="$fragmentor('/alpinejs_fragmentor/sloth.html', $refs.goHere, '<img src="sloth.jpg">', $refs.loadingText)"">click me</button>
+    <div x-ref="loadingText"></div>
+    <div x-ref="goHere"></div>
+</div>
+            </textarea>
+        </div>
+    </div>
+
+    <div class="example-card">
+        <div class="example-card-header">$fregmentor_markup magic call</div>
+
+        <div class="example-card-body">
+            <p>$fragmentor('html to send to element', 'element to push html to')</p>
+            <textarea style="width: 100%; height: 150px" disabled>
+
+<!-- Will update the goHere html to show the sloth.jpg image -->
+<div x-data>
+    <button @click="$fragmentor_markup('<img src="sloth.jpg">', $refs.goHere)"">click me</button>
+    <div x-ref="goHere"></div>
+</div>
+
+            </textarea>
+        </div>
+    </div>
 
     <div class="example-card">
 
@@ -120,7 +197,7 @@
         <div class="example-card-header">Example of the fragmentor magic call pushing the response to another element on the page using Alpine refs.</div>
 
         <div class="example-card-body">
-            <p>The fetch call to the content will only happen when this element enters the viewport.</p>
+            <p>Fragmentor will send the contents of the response to another element using alpinejs x-ref.</p>
             <code>
                 x-init="$fragmentor('/alpinejs_fragmentor/sloth.html', $refs.fragment1)"
             </code>
@@ -172,7 +249,7 @@
 
         <div class="example-card-body">
 
-            <p>Injects the loading image into the target element, then replaces it with the content from the fragment.</p>
+            <p>$fragmentor_markup sends a loading image to the element that will then be updated with the route response from $fragmentor.</p>
 
 
             <p>Button:</p>
@@ -208,7 +285,7 @@
 
         <div class="example-card-body">
 
-            <p>Injects the loading image into the target element, then replaces it with the content from the fragment.</p>
+            <p>Will change the button text to Loading..., then when the response is successful it will switch the contents back to the original contents</p>
 
 
             <p>Button:</p>
@@ -248,7 +325,8 @@
 
         <div class="example-card-body">
 
-            <p>Injects the loading image into the target element, then replaces it with the content from the fragment.</p>
+            <p>When the button is clicked it will send 'loading...' to the contents of the x-ref specified after. After the response is successful, it will
+                switch the contents back.</p>
 
 
             <p>Button:</p>
