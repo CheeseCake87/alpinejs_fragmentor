@@ -92,7 +92,7 @@
                 x-fragmentor:get="/alpinejs_fragmentor/sloth.html"
             </code>
             <div style="padding: 20px;" x-fragmentor:get="/alpinejs_fragmentor/sloth.html">
-                <img src="https://cheesecake87.github.iohttps://cheesecake87.github.io/alpinejs_fragmentor/table.htmlstatic/puff.svg" alt="loading...">
+                <img src="https://cheesecake87.github.io/alpinejs_fragmentor/static/puff.svg" alt="loading...">
             </div>
 
         </div>
@@ -105,10 +105,10 @@
         <div class="example-card-body">
             <p>This is used to allow certain fragments to be delayed in their loading.</p>
             <code>
-                x-fragmentor:get.delay.1000ms="https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html"
+                x-fragmentor:get.delay.1000ms="/alpinejs_fragmentor/sloth.html"
             </code>
-            <div style="padding: 20px;" x-fragmentor:get.delay.1000ms="https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html">
-                <img src="https://cheesecake87.github.iohttps://cheesecake87.github.io/alpinejs_fragmentor/table.htmlstatic/puff.svg" alt="loading...">
+            <div style="padding: 20px;" x-fragmentor:get.delay.1000ms="/alpinejs_fragmentor/sloth.html">
+                <img src="https://cheesecake87.github.io/alpinejs_fragmentor/static/puff.svg" alt="loading...">
             </div>
 
         </div>
@@ -122,15 +122,15 @@
         <div class="example-card-body">
             <p>The fetch call to the content will only happen when this element enters the viewport.</p>
             <code>
-                x-init="$fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html', $refs.fragment1)"
+                x-init="$fragmentor('/alpinejs_fragmentor/sloth.html', $refs.fragment1)"
             </code>
 
-            <div x-init="$fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html', $refs.fragment1)">
+            <div x-init="$fragmentor('/alpinejs_fragmentor/sloth.html', $refs.fragment1)">
 
             </div>
 
             <div style="padding: 20px;" x-ref="fragment1" style="padding-bottom: 20px">
-                <img src="https://cheesecake87.github.iohttps://cheesecake87.github.io/alpinejs_fragmentor/table.htmlstatic/puff.svg" alt="loading...">
+                <img src="https://cheesecake87.github.io/alpinejs_fragmentor/static/puff.svg" alt="loading...">
             </div>
 
         </div>
@@ -144,20 +144,20 @@
         <div class="example-card-body">
             <p>Button:</p>
             <code>
-                @click="$fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html', $refs.entry)"
+                @click="$fragmentor('/alpinejs_fragmentor/sloth.html', $refs.entry)"
             </code>
             <p>Entry div:</p>
             <code>
-                x-init="$fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html')" x-ref="entry"
+                x-init="$fragmentor('/alpinejs_fragmentor/sloth.html')" x-ref="entry"
             </code>
 
             <div style="padding: 20px">
-                <button @click="$fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html', $refs.entry)">Show Sloth</button>
-                <button @click="$fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmltable.html', $refs.entry)">Show Table</button>
+                <button @click="$fragmentor('/alpinejs_fragmentor/sloth.html', $refs.entry)">Show Sloth</button>
+                <button @click="$fragmentor('/alpinejs_fragmentor/table.html', $refs.entry)">Show Table</button>
             </div>
 
-            <div style="padding: 20px" x-init="$fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html')" x-ref="entry">
-                <img src="https://cheesecake87.github.iohttps://cheesecake87.github.io/alpinejs_fragmentor/table.htmlstatic/puff.svg" alt="loading...">
+            <div style="padding: 20px" x-init="$fragmentor('/alpinejs_fragmentor/sloth.html')" x-ref="entry">
+                <img src="https://cheesecake87.github.io/alpinejs_fragmentor/static/puff.svg" alt="loading...">
             </div>
 
         </div>
@@ -177,25 +177,25 @@
 
             <p>Button:</p>
             <code>
-                @click="$fragmentor_markup(loading_image, $refs.entry2); $fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html', $refs.entry2)"
+                @click="$fragmentor_markup(loading_image, $refs.entry2); $fragmentor('/alpinejs_fragmentor/sloth.html', $refs.entry2)"
             </code>
 
             <p>Entry div:</p>
             <code>
-                x-init="$fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html-sloth')" x-ref="entry2"
+                x-init="$fragmentor('/alpinejs_fragmentor/sloth.html-sloth')" x-ref="entry2"
             </code>
 
             <div style="padding: 20px;">
-                <button @click="$fragmentor_markup(loading_image, $refs.entry2); $fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html', $refs.entry2)">
+                <button @click="$fragmentor_markup(loading_image, $refs.entry2); $fragmentor('/alpinejs_fragmentor/sloth.html', $refs.entry2)">
                     Show Sloth
                 </button>
-                <button @click="$fragmentor_markup(loading_image, $refs.entry2); $fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmltable.html', $refs.entry2)">
+                <button @click="$fragmentor_markup(loading_image, $refs.entry2); $fragmentor('/alpinejs_fragmentor/table.html', $refs.entry2)">
                     Show Table
                 </button>
             </div>
 
-            <div style="padding: 20px;" x-init="$fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html')" x-ref="entry2">
-                <img src="https://cheesecake87.github.iohttps://cheesecake87.github.io/alpinejs_fragmentor/table.htmlstatic/puff.svg" alt="loading...">
+            <div style="padding: 20px;" x-init="$fragmentor('/alpinejs_fragmentor/sloth.html')" x-ref="entry2">
+                <img src="https://cheesecake87.github.io/alpinejs_fragmentor/static/puff.svg" alt="loading...">
             </div>
 
         </div>
@@ -213,29 +213,29 @@
 
             <p>Button:</p>
             <code>
-                @click="$fragmentor_markup(loading_image, $refs.entry3); $fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html', $refs.entry3, 'loading...')"
+                @click="$fragmentor_markup(loading_image, $refs.entry3); $fragmentor('/alpinejs_fragmentor/sloth.html', $refs.entry3, 'loading...')"
             </code>
             <p>Image in button</p>
             <code>
-                @click="$fragmentor_markup(loading_image, $refs.entry3); $fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmltable.html', $refs.entry3, loading_image)"
+                @click="$fragmentor_markup(loading_image, $refs.entry3); $fragmentor('/alpinejs_fragmentor/table.html', $refs.entry3, loading_image)"
             </code>
 
             <p>Entry div:</p>
             <code>
-                x-init="$fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html-sloth')" x-ref="entry3"
+                x-init="$fragmentor('/alpinejs_fragmentor/sloth.html-sloth')" x-ref="entry3"
             </code>
 
             <div style="padding: 20px;">
-                <button @click="$fragmentor_markup(loading_image, $refs.entry3); $fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html', $refs.entry3, 'loading...')">
+                <button @click="$fragmentor_markup(loading_image, $refs.entry3); $fragmentor('/alpinejs_fragmentor/sloth.html', $refs.entry3, 'loading...')">
                     Show Sloth
                 </button>
-                <button @click="$fragmentor_markup(loading_image, $refs.entry3); $fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmltable.html', $refs.entry3, loading_image)">
+                <button @click="$fragmentor_markup(loading_image, $refs.entry3); $fragmentor('/alpinejs_fragmentor/table.html', $refs.entry3, loading_image)">
                     Show Table
                 </button>
             </div>
 
-            <div style="padding: 20px;" x-init="$fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html')" x-ref="entry3">
-                <img src="https://cheesecake87.github.iohttps://cheesecake87.github.io/alpinejs_fragmentor/table.htmlstatic/puff.svg" alt="loading...">
+            <div style="padding: 20px;" x-init="$fragmentor('/alpinejs_fragmentor/sloth.html')" x-ref="entry3">
+                <img src="https://cheesecake87.github.io/alpinejs_fragmentor/static/puff.svg" alt="loading...">
             </div>
 
         </div>
@@ -253,7 +253,7 @@
 
             <p>Button:</p>
             <code>
-                @click="$fragmentor_markup(loading_image, $refs.entry4); $fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html', $refs.entry4, 'loading...',
+                @click="$fragmentor_markup(loading_image, $refs.entry4); $fragmentor('/alpinejs_fragmentor/sloth.html', $refs.entry4, 'loading...',
                 $refs.loadingMarker)"
             </code>
 
@@ -264,22 +264,22 @@
 
             <p>Entry div:</p>
             <code>
-                x-init="$fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html-sloth')" x-ref="entry4"
+                x-init="$fragmentor('/alpinejs_fragmentor/sloth.html-sloth')" x-ref="entry4"
             </code>
 
             <div style="padding: 20px;">
-                <button @click="$fragmentor_markup(loading_image, $refs.entry4); $fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html', $refs.entry4, 'loading...', $refs.loadingMarker)">
+                <button @click="$fragmentor_markup(loading_image, $refs.entry4); $fragmentor('/alpinejs_fragmentor/sloth.html', $refs.entry4, 'loading...', $refs.loadingMarker)">
                     Show Sloth
                 </button>
-                <button @click="$fragmentor_markup(loading_image, $refs.entry4); $fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmltable.html', $refs.entry4, 'loading...', $refs.loadingMarker)">
+                <button @click="$fragmentor_markup(loading_image, $refs.entry4); $fragmentor('/alpinejs_fragmentor/table.html', $refs.entry4, 'loading...', $refs.loadingMarker)">
                     Show Table
                 </button>
             </div>
 
             <div x-ref="loadingMarker" style="border: 1px solid black; padding: 10px">Loading marker box</div>
 
-            <div style="padding: 20px;" x-init="$fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html')" x-ref="entry4">
-                <img src="https://cheesecake87.github.iohttps://cheesecake87.github.io/alpinejs_fragmentor/table.htmlstatic/puff.svg" alt="loading...">
+            <div style="padding: 20px;" x-init="$fragmentor('/alpinejs_fragmentor/sloth.html')" x-ref="entry4">
+                <img src="https://cheesecake87.github.io/alpinejs_fragmentor/static/puff.svg" alt="loading...">
             </div>
 
         </div>
@@ -320,10 +320,10 @@
         <div class="example-card-body">
             <p>The fetch call to the content will only happen when this element enters the viewport.</p>
             <code>
-                x-intersect="$fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html')"
+                x-intersect="$fragmentor('/alpinejs_fragmentor/sloth.html')"
             </code>
-            <div style="padding: 20px;" x-intersect="$fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html')">
-                <img src="https://cheesecake87.github.iohttps://cheesecake87.github.io/alpinejs_fragmentor/table.htmlstatic/puff.svg" alt="loading...">
+            <div style="padding: 20px;" x-intersect="$fragmentor('/alpinejs_fragmentor/sloth.html')">
+                <img src="https://cheesecake87.github.io/alpinejs_fragmentor/static/puff.svg" alt="loading...">
             </div>
 
         </div>
@@ -337,15 +337,15 @@
 
             <p>This example is pushing the response to another element using x-ref.</p>
             <code>
-                x-intersect="$fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html', $refs.fragment2)"
+                x-intersect="$fragmentor('/alpinejs_fragmentor/sloth.html', $refs.fragment2)"
             </code>
 
-            <div x-intersect="$fragmentor('https://cheesecake87.github.io/alpinejs_fragmentor/table.htmlsloth.html', $refs.fragment2)">
+            <div x-intersect="$fragmentor('/alpinejs_fragmentor/sloth.html', $refs.fragment2)">
 
             </div>
 
             <div style="padding: 20px;" x-ref="fragment2">
-                <img src="https://cheesecake87.github.iohttps://cheesecake87.github.io/alpinejs_fragmentor/table.htmlstatic/puff.svg" alt="loading...">
+                <img src="https://cheesecake87.github.io/alpinejs_fragmentor/static/puff.svg" alt="loading...">
             </div>
 
         </div>
